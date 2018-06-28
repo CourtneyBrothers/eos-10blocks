@@ -6,7 +6,7 @@ function BlockList(props) {
   return (
     <div>
       <div>
-      {props.blocks.map(b => <Blockcontent key={b.id} headBlockTime = {b.headBlockTime} headBlockId={b.headBlockId}  />)}
+      {props.blocks.map(b => <Blockcontent key={b.id} timestamp = {b.timestamp} />)}
       </div>
      </div> 
   ); 
