@@ -5,7 +5,7 @@ import React from "react";
 function Blockcontent(props) {
   return <div> 
           <div>
-            <h1> click for full block </h1>
+            <h1> block </h1>
             block id: {props.id} block timestamp: {props.timestamp} count of actions: {props.transactions}
           </div>
           <div className="fullBlock" >
