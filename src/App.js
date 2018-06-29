@@ -18,30 +18,19 @@ class App extends Component {
       httpEndpoint:'https://eos.greymass.com'
     }
     let eos  = api(config)
-
+  
     let data = []
   
     const block1 = eos.getInfo(async (error,result)=>{
       console.log(await result, "result");
       let block10 = await result.head_block_num;
-      console.log(block10, "head block");
-      // let block9 = +block10 - 1;
-
-      // let block8 = +block9 - 1;
-      // let block7 = +block8 -1;
-      // let block6 = +block7 -1;
-      // let block5 = +block6 -1;
-      // let block4 = +block5-1;
-      // let block3 = +block4-1;
-      // let block2 = +block3-1;
-      // let block1= +block2-1;
-
-      // console.log(block10, block9,block8,block7,block6,block5,block4,block3,block2,block1)
+      console.log(block10, "head block")
 
       async function getRecentBlocks(headBlock){
         let data = [];
         const z = await eos.getBlock(+headBlock)
         data.push(z)
+        console.log(z.transactions,"z")
         const a = await eos.getBlock(+headBlock -1)
         data.push(a);
         const b = await eos.getBlock(+headBlock -2)
@@ -68,7 +57,20 @@ class App extends Component {
         const recentBlocks = result.map(b => {
           return {
             id: b.id,
-            timestamp: b.timestamp
+            timestamp: b.timestamp,
+            transactions: +b.transactions.length,
+            action_mroot: b.action_mroot,
+            block_extentions: b.block_extentions,
+            block_num: b.block_num,
+            confirmed: b.confirmed,
+            header_extensions: b.header_extensions,
+            new_producers: b.new_producers,
+            previous: b.previous,
+            producter: b.producer,
+            producer_signature: b.producer_signature,
+            ref_block_prefix: b.ref_block_prefix,
+            schedule_version: b.schedule_version,
+            transaction_mroot: b.transaction_mroot          
           };
         });
         const newState = Object.assign({}, this.state, {
@@ -85,8 +87,10 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">10 most recent eos blocks</h1>
         </header>
-
+        
         <BlockList blocks={this.state.blocks} />
+
+        <button onClick={()=>{window.location.reload();}}>get most recent</button>
       </div>
     );
   }
