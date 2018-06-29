@@ -2,14 +2,13 @@ import React from "react";
 
 
 
-
 function Blockcontent(props) {
   return <div> 
           <div>
-            <h1> block </h1>
+            <h1> click for full block </h1>
             block id: {props.id} block timestamp: {props.timestamp} count of actions: {props.transactions}
           </div>
-          <div>
+          <div className="fullBlock" >
             <h1>full block content</h1> 
             id: {props.id}{"\n"}
             timestamp: {props.timestamp}{"\n"}
